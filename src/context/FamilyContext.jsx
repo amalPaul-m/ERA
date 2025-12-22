@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import initialFamiliesData from '../data/families.json';
 import initialFeesData from '../data/fees.json';
 import initialPaymentsData from '../data/payments.json';
+import { syncDataWithStorage } from '../utils/syncUtils';
 
 const FamilyContext = createContext();
 
@@ -22,32 +23,19 @@ export const FamilyProvider = ({ children }) => {
     const [notification, setNotification] = useState('');
 
     useEffect(() => {
-        // Load data from localStorage or use initial JSON
+        // Sync JSON data with localStorage on every refresh
         const loadData = () => {
-            const storedData = localStorage.getItem('era_families_v1');
-            if (storedData) {
-                setFamilies(JSON.parse(storedData));
-            } else {
-                setFamilies(initialFamiliesData);
-                localStorage.setItem('era_families_v1', JSON.stringify(initialFamiliesData));
-            }
+            // Sync families data
+            const syncedFamilies = syncDataWithStorage('era_families_v1', initialFamiliesData);
+            setFamilies(syncedFamilies);
 
-            // Load fees and payments
-            const storedFees = localStorage.getItem('era_fees_v1');
-            if (storedFees) {
-                setFees(JSON.parse(storedFees));
-            } else {
-                setFees(initialFeesData);
-                localStorage.setItem('era_fees_v1', JSON.stringify(initialFeesData));
-            }
+            // Sync fees data
+            const syncedFees = syncDataWithStorage('era_fees_v1', initialFeesData);
+            setFees(syncedFees);
 
-            const storedPayments = localStorage.getItem('era_payments_v1');
-            if (storedPayments) {
-                setPayments(JSON.parse(storedPayments));
-            } else {
-                setPayments(initialPaymentsData);
-                localStorage.setItem('era_payments_v1', JSON.stringify(initialPaymentsData));
-            }
+            // Sync payments data
+            const syncedPayments = syncDataWithStorage('era_payments_v1', initialPaymentsData);
+            setPayments(syncedPayments);
 
             setLoading(false);
         };

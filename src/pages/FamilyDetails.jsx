@@ -42,7 +42,7 @@ export default function FamilyDetails() {
 
             <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                 {/* Cover / Primary Info */}
-                <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-6 sm:p-8">
+                <div className="bg-linear-to-br from-blue-600 to-blue-700 text-white p-6 sm:p-8">
                     <div className="flex justify-between items-start">
                         <div className="flex-1">
                             <div className="flex justify-between items-start">

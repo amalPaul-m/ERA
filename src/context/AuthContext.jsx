@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import credentialsData from '../data/credentials.json';
+import { syncDataWithStorage } from '../utils/syncUtils';
 
 const AuthContext = createContext();
 
@@ -14,8 +15,13 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [credentials, setCredentials] = useState(credentialsData);
 
     useEffect(() => {
+        // Sync credentials data with localStorage on every refresh
+        const syncedCredentials = syncDataWithStorage('era_credentials_v1', credentialsData);
+        setCredentials(syncedCredentials);
+
         // Check for existing session in localStorage
         const storedUser = localStorage.getItem('era_auth_user');
         if (storedUser) {
@@ -25,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (phone, password) => {
-        const credential = credentialsData[phone];
+        const credential = credentials[phone];
         if (credential && credential.password === password) {
             const userData = {
                 phone,
