@@ -13,7 +13,7 @@ export default defineConfig({
         name: 'ERA Residents Association',
         short_name: 'ERA Connect',
         description: 'ERA Residents Family Directory & Management',
-        theme_color: '#6366f1',
+        theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
