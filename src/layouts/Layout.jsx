@@ -20,7 +20,7 @@ export default function Layout() {
                     <Link to="/" className="text-xl font-bold text-blue-600 flex items-center gap-2">
                         {/* <span className="bg-blue-600 text-white p-1 rounded-md text-sm">ERA</span>
                         Residents */}
-                        <img src={Logo} alt="ERA Logo" height="100" width="100" />
+                        <img src={Logo} alt="ERA Logo" height="90" width="90" />
                     </Link>
                     <div className="flex items-center gap-4">
                         {user ? (
